@@ -1,0 +1,84 @@
+<!DOCTYPE>
+<html>
+<head>
+  <title>PPBC Startup Service</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style>
+   .form-container {
+    background: #f1f1f1;
+    border: 1px solid #337ab7;
+    border-radius: 10px;
+    margin-top: 1em;
+    padding-bottom: 2em;
+  }
+  </style>
+</head>
+<body>
+<main class="container">
+  <div class="row">
+    <div class="form-container col-md-6 col-md-offset-3">
+      <h1 class="text-primary">
+        PPBC Startup Service
+      </h1>
+      <h2 class="text-muted">
+        <small>Pied Piper Bank of Canada</small>
+      </h2>
+      <form action="/submit" method="post">
+        <div class="form-group">
+          <label for="name">Company Name</label>
+          <input type="text" class="form-control" name="name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" name="email">
+        </div>
+        <div class="form-group">
+          <label for="description">Company Description</label>
+          <textarea class="form-control" rows="3" name="description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="products">Products of Interest</label>
+          {{#products}}
+          <div class="form-check">
+            <input class="form-check-input" name="products" type="checkbox" value="{{id}}">
+            <label class="form-check-label">
+            {{name}}
+            </label>
+          </div>
+          {{/products}}
+        </div>
+        <div class="form-group">
+          <label for="date">Response Date</label>
+          <input type="date" class="form-control" name="date">
+          <small class="form-text text-muted">Select day in the future to hear back from us by</small>
+        </div>
+        <div class="form-group">
+          <label for="ceo_name">Number of Employees</label>
+          <input type="number" class="form-control" name="employee_count" id="employee_count">
+        </div>
+        <div class="form-group" id="ceo_container" style="display: none;">
+          <label for="ceo_name">CEO Name</label>
+          <input type="text" class="form-control" name="ceo_name">
+        </div>
+        <div class="form-group">
+          <label for="referral">Where did you hear about PPBC?</label>
+          <input type="text" class="form-control" name="referral">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<script>
+  const ceoContainer = document.getElementById('ceo_container');
+  
+  document.getElementById('employee_count').addEventListener('keyup', function() {
+    if (this.value >= 1)
+      ceoContainer.style.display = 'block';
+    else
+      ceoContainer.style.display = 'none';
+  });
+</script>
+</body>
+</html>
